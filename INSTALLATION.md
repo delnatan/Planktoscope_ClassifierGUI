@@ -1,6 +1,6 @@
 # Detailed Installation Guide
 
-This guide provides comprehensive instructions for setting up the Microscopy Classifier application on different operating systems.
+This guide provides comprehensive instructions for setting up the Planktoscope Classifier application on different operating systems.
 
 ## System Requirements
 
@@ -18,152 +18,165 @@ This guide provides comprehensive instructions for setting up the Microscopy Cla
 
 ## Installation Steps
 
+### Universal Quick Start
+
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/babo989/Planktoscope_ClassifierGUI.git
+   cd Planktoscope_ClassifierGUI
+   ```
+
+2. **Run the Installer** (Linux/macOS)
+   ```bash
+   chmod +x install.sh
+   ./install.sh
+   ```
+
+Or follow the manual steps below for detailed installation by OS.
+
+---
+
 ### Windows
 
 1. **Install Python**
    - Download Python from [python.org](https://www.python.org/downloads/windows/)
    - During installation, check "Add Python to PATH"
-   - Verify installation by opening Command Prompt and typing:
-     ```
+   - Verify installation:
+     ```bash
      python --version
      ```
 
 2. **Install Git** (if not already installed)
    - Download from [git-scm.com](https://git-scm.com/download/win)
-   - Follow default installation options
 
 3. **Clone the Repository**
-   ```
-   git clone https://github.com/yourusername/microscopy-classifier.git
-   cd microscopy-classifier
+   ```bash
+   git clone https://github.com/babo989/Planktoscope_ClassifierGUI.git
+   cd Planktoscope_ClassifierGUI
    ```
 
 4. **Create a Virtual Environment**
-   ```
+   ```bash
    python -m venv venv
    venv\Scripts\activate
    ```
 
 5. **Install Dependencies**
-   ```
+   ```bash
    pip install -r requirements.txt
    ```
 
-6. **For GPU Support** (optional)
-   - Install NVIDIA drivers from [nvidia.com/drivers](https://www.nvidia.com/Download/index.aspx)
-   - Install CUDA Toolkit from [developer.nvidia.com/cuda-downloads](https://developer.nvidia.com/cuda-downloads)
-   - Install cuDNN from [developer.nvidia.com/cudnn](https://developer.nvidia.com/cudnn)
-   - Uncomment the GPU-related lines in requirements.txt and run:
-     ```
-     pip install -r requirements.txt
-     ```
+6. **Optional: Enable GPU Support**
+   - Install [CUDA](https://developer.nvidia.com/cuda-downloads) and [cuDNN](https://developer.nvidia.com/cudnn)
+   - Make sure your TensorFlow version matches your CUDA version
 
 ### macOS
 
 1. **Install Homebrew** (if not already installed)
-   ```
+   ```bash
    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
    ```
 
-2. **Install Python**
-   ```
-   brew install python
-   ```
-
-3. **Install Git** (if not already installed)
-   ```
-   brew install git
+2. **Install Python & Git**
+   ```bash
+   brew install python git
    ```
 
-4. **Clone the Repository**
-   ```
-   git clone https://github.com/yourusername/microscopy-classifier.git
-   cd microscopy-classifier
+3. **Clone the Repository**
+   ```bash
+   git clone https://github.com/babo989/Planktoscope_ClassifierGUI.git
+   cd Planktoscope_ClassifierGUI
    ```
 
-5. **Create a Virtual Environment**
-   ```
+4. **Create a Virtual Environment**
+   ```bash
    python3 -m venv venv
    source venv/bin/activate
    ```
 
-6. **Install Dependencies**
-   ```
+5. **Install Dependencies**
+   ```bash
    pip install -r requirements.txt
    ```
 
 ### Linux (Ubuntu/Debian)
 
 1. **Update Package Manager**
-   ```
-   sudo apt update
-   sudo apt upgrade
+   ```bash
+   sudo apt update && sudo apt upgrade
    ```
 
-2. **Install Python and Dependencies**
-   ```
+2. **Install Python, pip, venv, and Git**
+   ```bash
    sudo apt install python3 python3-pip python3-venv git
    ```
 
 3. **Clone the Repository**
-   ```
-   git clone https://github.com/yourusername/microscopy-classifier.git
-   cd microscopy-classifier
+   ```bash
+   git clone https://github.com/babo989/Planktoscope_ClassifierGUI.git
+   cd Planktoscope_ClassifierGUI
    ```
 
 4. **Create a Virtual Environment**
-   ```
+   ```bash
    python3 -m venv venv
    source venv/bin/activate
    ```
 
 5. **Install Dependencies**
-   ```
+   ```bash
    pip install -r requirements.txt
    ```
 
-6. **For GPU Support** (optional)
-   - Follow the [TensorFlow GPU support guide](https://www.tensorflow.org/install/gpu) for Linux
-   - Uncomment the GPU-related lines in requirements.txt and run:
-     ```
-     pip install -r requirements.txt
-     ```
+6. **Optional: Enable GPU Support**
+   - Follow the [TensorFlow GPU guide](https://www.tensorflow.org/install/gpu)
 
 ## Verifying Installation
 
-After installation, verify that everything is working correctly:
-
-1. **Check TensorFlow Installation**
-   ```python
-   python -c "import tensorflow as tf; print(tf.__version__); print('GPU Available: ', len(tf.config.list_physical_devices('GPU'))>0)"
+1. **Check TensorFlow**
+   ```bash
+   python -c "import tensorflow as tf; print(tf.__version__); print('GPU Available:', tf.config.list_physical_devices('GPU'))"
    ```
-   This should print the TensorFlow version and whether a GPU is available.
 
 2. **Run the Application**
-   ```
+   ```bash
    python main.py
    ```
-   The application should start without errors.
 
 ## Troubleshooting
 
 ### Common Issues
 
 #### ImportError: No module named 'tensorflow'
-- Make sure you've activated the virtual environment
-- Try reinstalling: `pip install --upgrade tensorflow`
+- Activate your virtual environment
+- Run:
+  ```bash
+  pip install --upgrade tensorflow
+  ```
 
 #### CUDA/GPU not detected
-- Verify NVIDIA drivers are installed: `nvidia-smi`
-- Check CUDA installation: `nvcc --version`
-- Ensure TensorFlow version is compatible with your CUDA version
+- Verify NVIDIA drivers:
+  ```bash
+  nvidia-smi
+  ```
+- Check CUDA version:
+  ```bash
+  nvcc --version
+  ```
+- Make sure your TensorFlow version matches your CUDA
 
-#### PyQt5 installation issues
-- On Linux: `sudo apt-get install python3-pyqt5`
-- On macOS: `brew install pyqt5`
+#### PyQt5 not found
+- On Linux:
+  ```bash
+  sudo apt-get install python3-pyqt5
+  ```
+- On macOS:
+  ```bash
+  brew install pyqt5
+  ```
 
-#### Memory errors during training
-- Reduce batch size in the application settings
-- Close other memory-intensive applications
+#### Memory Errors
+- Reduce batch size
+- Restart app and close background processes
 
-For more issues, please check the [GitHub Issues](https://github.com/yourusername/microscopy-classifier/issues) page or create a new issue.
+For more help, visit the [GitHub Issues](https://github.com/babo989/Planktoscope_ClassifierGUI/issues) page.
