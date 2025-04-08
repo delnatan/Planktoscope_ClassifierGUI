@@ -4,14 +4,14 @@ A GUI application for processing and classifying microscopy images from Planktos
 
 ## Screenshots
 <div align="center">
-  <img src="screenshots/Main_Window.png" alt="Main Interface" width="80%">
+  <img src="docs/images/Main_Window.png" alt="Main Interface" width="80%">
   <p><em>The main application interface showing raw image processing mode</em></p>
   <br>
-  <img src="screenshots/Post_Classification.png" alt="Object Classification" width="80%">
+  <img src="docs/images/Pbject_Classification.png" alt="Object Classification" width="80%">
   <p><em>Classification of segmented objects with size filtering</em></p>
   <br>
-  <img src="screenshots/Segmented_Mode.png" alt="Thumbnail Gallery" width="80%">
-  <p><em>Segmented image panel</em></p>
+  <img src="docs/images/Segmented_Mode.png" alt="Thumbnail Gallery" width="80%">
+  <p><em>Thumbnail gallery of detected and classified objects</em></p>
 </div>
 
 ## Features
@@ -27,78 +27,95 @@ A GUI application for processing and classifying microscopy images from Planktos
 
 ### Requirements
 
-- macOS with Apple Silicon (M1/M2) or Intel processor
-- Miniconda or Anaconda (recommended)
-- CUDA-capable GPU recommended but not required for faster processing
+- Python 3.10 recommended
+- macOS (Apple Silicon or Intel), Windows, or Linux
+- Anaconda or Miniconda (recommended)
+- For faster processing:
+  - macOS: Apple Silicon (M1/M2) 
+  - Windows/Linux: CUDA-capable GPU
 
-### Quick Installation (Recommended for macOS)
+### Installation Options
 
-For the most reliable setup on macOS, we provide an installation script that handles all dependencies correctly:
+There are a few nice installation options:
 
-```bash
-# Download the repository
-git clone https://github.com/babo989/Planktoscope_ClassifierGUI.git
-cd Planktoscope_ClassifierGUI
+1. **Quick Installation Script for macOS**
 
-# Make the installation script executable
-chmod +x install.sh
+   For the most reliable setup on macOS:
 
-# Run the installation script
-./install.sh
-```
-
-The script will create a conda environment with all necessary dependencies in the correct order to avoid compatibility issues.
-
-### Manual Installation
-
-If you prefer to install manually, follow these steps:
-
-1. Create a new conda environment with Python 3.10:
    ```bash
-   conda create -n planktoscope python=3.10
-   conda activate planktoscope
+   # Download the repository
+   git clone https://github.com/yourusername/planktoscope-classifier.git
+   cd planktoscope-classifier
+
+   # Make the installation script executable
+   chmod +x install.sh
+
+   # Run the installation script
+   ./install.sh
    ```
 
-2. Install PyQt using conda:
+2. **Anaconda/Miniconda Installation (Recommended for all platforms)**
+
    ```bash
+   # Clone the repository
+   git clone https://github.com/yourusername/planktoscope-classifier.git
+   cd planktoscope-classifier
+
+   # Create and activate conda environment
+   conda create -n planktoscope python=3.10
+   conda activate planktoscope
+
+   # Install PyQt using conda
    conda install -c conda-forge pyqt=5.15.7
    ```
 
-3. Install TensorFlow system dependencies:
+   **For macOS**:
    ```bash
+   # For Apple Silicon, install TensorFlow dependencies
    conda install -c apple tensorflow-deps
-   ```
 
-4. Install NumPy with specific version constraints (important for macOS):
-   ```bash
+   # Install NumPy with specific version constraints
    pip install "numpy>=1.24.0,<1.25.0" --force-reinstall --no-cache-dir
-   ```
 
-5. Install the remaining Python packages:
-   ```bash
+   # Install remaining packages
    pip install scipy==1.10.1 tensorflow-macos==2.10.0 tensorflow-metal==0.6.0 tensorflow-hub==0.12.0
    pip install scikit-learn==1.2.2 scikit-image==0.20.0 pillow==9.5.0 matplotlib==3.7.1 pandas==2.0.1
    pip install opencv-python
    ```
 
-### Setup for NVIDIA GPU Users (Optional, for Linux/Windows)
+   **For Windows/Linux**:
+   ```bash
+   # Install scientific packages
+   conda install -c conda-forge numpy=1.24.0 scipy=1.10.1 scikit-learn=1.2.2 scikit-image=0.20.0
+   conda install -c conda-forge pillow=9.5.0 matplotlib=3.7.1 pandas=2.0.1 opencv
 
-If you have an NVIDIA GPU and want to enable GPU acceleration:
+   # Install TensorFlow
+   pip install tensorflow==2.10.0 tensorflow-hub==0.12.0
+   ```
 
-```bash
-# Activate the environment first
-conda activate planktoscope
+3. **Python Virtual Environment Installation**
 
-# Install CUDA toolkit appropriate for your TensorFlow version
-conda install -c conda-forge cudatoolkit=11.2 cudnn=8.1.0
+   If you prefer not to use Anaconda, you can use Python's built-in venv:
 
-# Set environment variables for TensorFlow to find CUDA
-# On Linux/macOS:
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CONDA_PREFIX/lib/
+   ```bash
+   # Clone the repository
+   git clone https://github.com/yourusername/planktoscope-classifier.git
+   cd planktoscope-classifier
 
-# On Windows (in Command Prompt):
-set LD_LIBRARY_PATH=%LD_LIBRARY_PATH%;%CONDA_PREFIX%\lib\
-```
+   # Create virtual environment
+   python -m venv venv
+
+   # Activate virtual environment
+   # On Windows:
+   venv\Scripts\activate
+   # On macOS/Linux:
+   source venv/bin/activate
+
+   # Install dependencies (platform-specific)
+   # See INSTALLATION.md for detailed platform-specific commands
+   ```
+
+For complete installation instructions including GPU setup and troubleshooting, see [INSTALLATION.md](INSTALLATION.md).
 
 ## Usage
 
@@ -106,23 +123,31 @@ set LD_LIBRARY_PATH=%LD_LIBRARY_PATH%;%CONDA_PREFIX%\lib\
 
 ```bash
 # Make sure the environment is activated
+# For Anaconda:
 conda activate planktoscope
+
+# OR for virtual environment:
+# On Windows:
+venv\Scripts\activate
+# On macOS/Linux:
+source venv/bin/activate
 
 # Run the application
 python main.py
 ```
+
 ### Segmented Image Mode Workflow
 
-In order to use the classification function, you will need to train a model using the Segmented Mode workflow first. See above
+In order to use the classification function, you will need to train a model using the Segmented Mode workflow first:
 
 1. **Set Classification Folder**: Set the directory in which your class folders will be created
-2. **Add Classes**: Add the number of classes that you wish you use for classification
-3. **Load Segmented Objects Folder**: Use this to load the folder containing segmented images
-4. **Train Model**: Click "Train Model" to use the class folders and train a custom model using the set epoch and batch sizes
+2. **Add Classes**: Add the names of the classes that you wish to use for classification(e.g. Diatom, Detritus)
+3. **Load Segmented Objects Folder**: Use this to load the folder containing segmented images you wish to use for training or later classifying
+4. **Train Model**: Click "Train Model" to use the class folders and train a custom model using the set epoch and batch sizes. See the Training guide for a better explantion on the architecture. 
 
 ### Raw Image Mode Workflow
 
-In order to use the classification function in Raw Mode, you will need to train a model using the Segmented Mode workflow first. See above
+In order to use the classification function in Raw Mode, you will need to train a model using the Segmented Mode workflow first:
 
 1. **Load Raw Images**: Click "Load Raw Images" and select a folder containing the Planktoscope images
 2. **Configure Parameters**: Adjust segmentation parameters in the left panel
