@@ -1,7 +1,7 @@
 """
 Planktoscope Classifier - Raw Images Mode
 -----------------------------------------------------------
-This module provides a UI panel for processing full microscopy images.
+This module provides a UI panel for processing full Planktoscope images.
 It allows users to:
 1. View and browse raw Planktoscope images
 2. Segment images to detect objects based on PlanktoScope's segmentation approach
@@ -410,9 +410,28 @@ class ZoomableGraphicsView(QGraphicsView):
         self.resetTransform()
 
     def wheelEvent(self, event):
-        zoom_in = event.angleDelta().y() > 0
-        factor = 1.25 if zoom_in else 0.8
+        # Define the base scaling factor for one "step" of the wheel.
+        zoom_factor_step = 1.25
+
+        # Determine whether we're zooming in or out.
+        if event.angleDelta().y() > 0:
+            # Zoom in: increase _zoom level if not already too high.
+            if self._zoom < 10:  # maximum zoom in level
+                self._zoom += 1
+                factor = zoom_factor_step
+            else:
+                factor = 1.0  # do not zoom further
+        else:
+            # Zoom out: decrease _zoom level if not already too low.
+            if self._zoom > -10:  # minimum zoom out level
+                self._zoom -= 1
+                factor = 1 / zoom_factor_step
+            else:
+                factor = 1.0  # do not zoom further
+
+        # Apply the scaling.
         self.scale(factor, factor)
+
 class RawModePanel(QWidget):
     """
     Panel for viewing raw Planktoscope images and segmenting them into objects.
