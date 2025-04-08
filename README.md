@@ -4,13 +4,13 @@ A GUI application for processing and classifying microscopy images from Planktos
 
 ## Screenshots
 <div align="center">
-  <img src="docs/screenshots/Main_Window.png" alt="Main Interface" width="80%">
+  <img src="screenshots/Main_Window.png" alt="Main Interface" width="80%">
   <p><em>The main application interface showing raw image processing mode</em></p>
   <br>
-  <img src="docs/images/Object_Classification.png" alt="Object Classification" width="80%">
+  <img src="screenshots/Object_Classification.png" alt="Object Classification" width="80%">
   <p><em>Classification of segmented objects with size filtering</em></p>
   <br>
-  <img src="docs/images/Segmented_Mode.png" alt="Thumbnail Gallery" width="80%">
+  <img src="screenshots/Segmented_Mode.png" alt="Thumbnail Gallery" width="80%">
   <p><em>Thumbnail gallery of detected and classified objects</em></p>
 </div>
 
