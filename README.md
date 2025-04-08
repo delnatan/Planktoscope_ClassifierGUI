@@ -37,8 +37,8 @@ For the most reliable setup on macOS, we provide an installation script that han
 
 ```bash
 # Download the repository
-git clone https://github.com/yourusername/planktoscope-classifier.git
-cd planktoscope-classifier
+git clone https://github.com/babo989/Planktoscope_ClassifierGUI.git
+cd Planktoscope_ClassifierGUI
 
 # Make the installation script executable
 chmod +x install.sh
