@@ -11,7 +11,7 @@ A GUI application for processing and classifying microscopy images from Planktos
   <p><em>Classification of segmented objects with size filtering</em></p>
   <br>
   <img src="screenshots/Segmented_Mode.png" alt="Thumbnail Gallery" width="80%">
-  <p><em>Thumbnail gallery of detected and classified objects</em></p>
+  <p><em>Segmented image panel</em></p>
 </div>
 
 ## Features
