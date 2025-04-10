@@ -1,4 +1,4 @@
-
+#!/usr/bin/env python
 """
 PLanktoscope Classifier - Main Application
 -----------------------------------------------------------
@@ -15,11 +15,20 @@ This is the main entry point of the application that sets up the UI.
 Author: [Adam Larson]
 Date: [4.1.2025]
 Version: 1.0
+
+History:
+[Daniel Elnatan] 4.10.2026 - swapped to using qtpy
 """
 
 import sys
 import os
-from PyQt5.QtWidgets import QApplication, QMainWindow, QTabWidget, QAction, QFileDialog, QMessageBox
+
+# DEPRECATED
+# from PyQt5.QtWidgets import QApplication, QMainWindow, QTabWidget, QAction, QFileDialog, QMessageBox
+
+
+from qtpy.QtWidgets import QApplication, QMainWindow, QTabWidget, QAction, QFileDialog, QMessageBox
+
 from raw_mode import RawModePanel
 from segmented_mode import SegmentedModePanel
 
